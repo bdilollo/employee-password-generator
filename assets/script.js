@@ -5,10 +5,17 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 
 }
+
+function generatePassword() {
+
+}
+
+// Add event listener to generate button
+// this calls the writePassword function defined above
+generateBtn.addEventListener("click", writePassword);
 
 // series of prompts for password criteria
 
@@ -25,7 +32,7 @@ function criteritaPrompts() {
   containSpecial = confirm("Special characters?");
   checkValidInput();
 }
-
+// generateBtn.addEventListener("click", criteritaPrompts);
 // validate input and at least one character type selected
 
 function checkValidInput() {
@@ -80,23 +87,22 @@ function concatArrays() {
     passwordArray = numberArray.concat(passwordArray);
   }
 }
-function generatePassword() {
-  // to generate password:
- 
 
-  // Math.floor(Math.random() * length of larger array) to generate random number, use number as index to select a position from array
-  // add selected character to new password array
-  // repeat until length of password array matches passwordLength variable
+var newPassword = [];
+function generatePassword() {
+  for(var i=0; i<passwordLength; i++) {
+    function generateRandomCharacter();
+  }
 }
 
-// Add event listener to generate button
-// this calls the writePassword function defined above
-generateBtn.addEventListener("click", writePassword);
-
-
-
-
-
+function generateRandomCharacter() {
+  var index = Math.floor(Math.random() * passwordArray.length);
+  var character = passwordArray[index];
+  newPassword = newPassword.push(character);
+}
+// Math.floor(Math.random() * length of larger array) to generate random number, use number as index to select a position from array
+// add selected character to new password array
+// repeat until length of password array matches passwordLength variable
 
 
 // when all prompts answered, generate a password that matches criteria
