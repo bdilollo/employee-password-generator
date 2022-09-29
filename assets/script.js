@@ -54,18 +54,36 @@ function checkValidLength() {
 }
 // criteritaPrompts();
 
+ // create arrays to draw from for uppercase, lowercase, numbers, and special characters
 var lowercaseArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 var uppercaseArray = lowercaseArray.map(element => {
   return element.toUpperCase();
 });
 var numberArray = [0,1,2,3,4,5,6,7,8,9];
-var specialArray = ["!","#","$","%","&","(",")","*","+","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~"]
+var specialArray = ["!","#","$","%","&","(",")","*","+","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~"] 
 
-function generatePassword() {
-  // to generate password:
-  // create arrays to draw from for uppercase, lowercase, numbers, and special characters
   // only using criteria where value=true
   // concat arrays where value=true into one larger array
+var passwordArray = [];
+
+function concatArrays() {
+  if(containLowercase == true) {
+    passwordArray = lowercaseArray.concat(passwordArray);
+  }
+  if(containUppercase == true) {
+    passwordArray = uppercaseArray.concat(passwordArray);
+  }
+  if(containSpecial == true) {
+    passwordArray = specialArray.concat(passwordArray);
+  }
+  if(containNumbers == true) {
+    passwordArray = numberArray.concat(passwordArray);
+  }
+}
+function generatePassword() {
+  // to generate password:
+ 
+
   // Math.floor(Math.random() * length of larger array) to generate random number, use number as index to select a position from array
   // add selected character to new password array
   // repeat until length of password array matches passwordLength variable
