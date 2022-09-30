@@ -1,17 +1,8 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+var passwordText = document.querySelector("#password");
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
 
-}
-
-function generatePassword() {
-
-}
 
 // Add event listener to generate button
 // this calls the writePassword function defined above
@@ -25,6 +16,7 @@ var containNumbers;
 var containSpecial;
 
 function criteritaPrompts() {
+  passwordText.innerHTML = "";
   alert("Select at least one criteria for your password.");
   containLowercase = confirm("Lowercase letters?");
   containUppercase = confirm("Uppercase letters?");
@@ -33,8 +25,8 @@ function criteritaPrompts() {
   checkValidInput();
 }
 generateBtn.addEventListener("click", criteritaPrompts);
-// validate input and at least one character type selected
 
+// validate input and at least one character type selected
 function checkValidInput() {
   if((containLowercase == false) && (containUppercase == false) && (containNumbers == false) && (containSpecial == false)) {
     alert("Invalid input. Please select at least one criteria to include in your password.");
@@ -88,26 +80,24 @@ function concatArrays() {
     passwordArray = numberArray.concat(passwordArray);
   }
   console.log(passwordArray);
+  generateRandomArray();
 }
 
-var newPassword = [];
-// function generatePassword() {
-//   for(var i=0; i<passwordLength; i++) {
-//     function generateRandomCharacter();
-//   }
-// }
-
-function generateRandomCharacter() {
+// generate random password of specified length
+newPassword = [];
+function generateRandomArray() {
   for(var i =0; i<passwordLength; i++) {
   var index = Math.floor(Math.random() * passwordArray.length);
   var character = passwordArray[index];
   newPassword.push(character);
   }
   console.log(newPassword);
+  checkPassword();
 }
 
 // make sure password generated includes all confirmed criteria
 // newPassword.some(checkPassword);
+var finalPassword = "";
 function checkPassword() {
   if(containLowercase==true) {
     var includesCritLower = newPassword.some(r=> lowercaseArray.includes(r));
@@ -126,22 +116,23 @@ function checkPassword() {
   console.log(includesCritNumber);
   console.log(includesCritSpecial);
   if(includesCritLower == false || includesCritUpper == false || includesCritNumber == false || includesCritSpecial == false) {
-    generateRandomCharacter();
+    newPassword.length = 0;
+    generateRandomArray();
   } else {
-
+    finalPassword = newPassword.join('');
+    console.log(finalPassword);
+    writePassword();
   }
 
 }
-// containLowercase = true;
-// containSpecial = false;
-// containUppercase = true;
-// containNumbers = true;
-// newPassword = ['1','a','A'];
-// checkPassword();
 
-// passwordArray = [1,2,3,4,5,6,7,8,9,0,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-// passwordLength =8;
-// generateRandomCharacter();
+// Write password to the #password input
+function writePassword() {
+  passwordText.innerHTML = finalPassword;
+  passwordArray.length = 0;
+  newPassword.length = 0;
+
+}
 
 
 // Math.floor(Math.random() * length of larger array) to generate random number, use number as index to select a position from array
